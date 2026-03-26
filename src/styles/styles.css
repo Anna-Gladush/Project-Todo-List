@@ -1,0 +1,14 @@
+:root {
+  /* --primary-color: #1269C7;
+  --secondary-color: #ffffff; */
+}
+@font-face {
+  font-family: Middle_Ages Deco;
+  src: url(../assets/fonts/MiddleAgesDeco_PERSONAL_USE.ttf);
+}
+* {
+  padding: 0;
+  margin: 0;
+  font-family: Middle_Ages Deco,'Times New Roman', Times, serif;
+  box-sizing: border-box;
+}
