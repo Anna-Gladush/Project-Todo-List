@@ -9,13 +9,14 @@
 @font-face {
   font-family: Ancient;
   src: url(../assets/fonts/Ancient\ Medium.ttf);
+  unicode-range: U+30-39;
 }
 :root {
   --primary-color: #9EB389;
   --secondary-color: #1b330e;
-  --primary-font: Middle_Ages,'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  --decorative-font: Middle_Ages Deco, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  --number-font: Ancient, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  --primary-font: Ancient, Middle_Ages,'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  --decorative-font: Ancient, Middle_Ages Deco, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  /* --number-font: Ancient, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
 }
 
 * {
@@ -46,8 +47,8 @@ header {
   display: flex;
   flex-direction: column;
 }
-.project-tab span {
-  font-family: var(--number-font);
+span {
+  /* font-family: var(--number-font); */
   font-size: 1.4em;
 }
 .project {
@@ -55,12 +56,13 @@ header {
   justify-content: space-between;
 }
 .project button {
-  width: 100px;
+  width: 70px;
+  font-size: 20px;
 }
 /* main {
   width: 100vh;
   height: 100vw;
 } */
-.workspace {
+/* .workspace {
 
-}
+} */
