@@ -13,15 +13,23 @@ project_1.push(he, she);
 project_1.push(new Note("Make tea", "drink", format(new Date(2026, 3, 27, 14, 46), "yyyy-MM-dd  hh-mm-ss"), 2, "...", true), new Note("Make tea", "drink", format(new Date(2026, 3, 27, 14, 46), "yyyy-MM-dd  hh-mm-ss"), 2, "...", true));
 console.log(project_1);
 
+const delete_note = (project) => {
+  const btn = document.querySelectorAll('.delete-btn');
+  btn.forEach((button) => button.addEventListener('click', () => {
+    console.log('work')
+    const idx = project.filter(elm => elm.id !== button.dataset.id);
+    workspace.innerHTML = '';
+    create_workspaceDOM(idx);
+  }));
+}
+
 const workspace = document.querySelector(".workspace");
 const create_workspaceDOM = (project) => {
   project.forEach((card) => CreateDOM.create_card(workspace, card.title, card.description, card.dueDate, card.priority, card.notes, card.checklist, card.id))
   open(project);
+  delete_note(project);
 }
-// const btn = document.querySelector('.click');
-// btn.addEventListener('click', () => {
-//   CreateDOM.open_card(project[1])
-// })
+
 const open_card = (c) => {
   const workspace = document.querySelector('.workspace');
   workspace.innerHTML = '';
@@ -39,21 +47,22 @@ const open_card = (c) => {
   CreateDOM.create_btn(card_btn, 'close', 'close', c.id);
 }
 const open = (project) => {
-  const btn_open = document.querySelectorAll('.open-btn');
-  btn_open.forEach((button) => button.addEventListener('click', () => {
+  const btn = document.querySelectorAll('.open-btn');
+  btn.forEach((button) => button.addEventListener('click', () => {
     const idx = project.find(elm => elm.id === button.dataset.id);
-    console.log(idx)
     open_card(idx);
     close(project);
+    delete_note(project);
   }));
   
 }
 const close = (project) => {
-  const btn_close = document.querySelectorAll('.close');
-  btn_close.forEach(button => button.addEventListener('click', () => {
+  const btn = document.querySelectorAll('.close');
+  btn.forEach(button => button.addEventListener('click', () => {
     console.log("work");
     workspace.innerHTML = '';
-    create_workspaceDOM(project)
+    create_workspaceDOM(project);
   }))
 }
 create_workspaceDOM(project_1)
+
