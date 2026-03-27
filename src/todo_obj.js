@@ -6,6 +6,7 @@ export class Note {
     this.priority = priority;
     this.notes = notes;
     this.checklist = checklist;
+    this.id = crypto.randomUUID();
   }
   // setters
   // set title(value) {
@@ -26,24 +27,4 @@ export class Note {
   check_toggle() {
     this.checklist = !this.checklist;
   }
-  // // getters
-  // get title() {
-  //   return this._title;
-  // }
-  // get description() {
-  //   return this._description;
-  // }
-  // get dueDate() {
-  //   return this._dueDate;
-  // }
-  // get priority() {
-  //   return this._priority;
-  // }
-
-  // get notes() {
-  //   return this._notes;
-  // }
-  // get checklist() {
-  //   return this.checklist;
-  // }
 }

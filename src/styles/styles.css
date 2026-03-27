@@ -59,10 +59,49 @@ span {
   width: 70px;
   font-size: 20px;
 }
-/* main {
-  width: 100vh;
-  height: 100vw;
-} */
-/* .workspace {
+.workspace {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: auto;
+  /* width: 10000em; */
+  /* justify-content: center; */
+}
+.card {
+  background-image: url('../assets/images/frame-work.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  font-size: 1em;
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-wrap: balance;
+  margin: 1.5em;
+  padding: 2em;
+  /* width: 2000px; */
+  height: 35em;
+  max-inline-size: 50ch;
 
-} */
+}
+.card span {
+  font-size: 2em;
+  max-inline-size: 30ch;
+}
+.card button {
+  height: 20px;
+  font-size: 1em;
+}
+.card-open {
+  text-align: center;
+  background-image: url('../assets/images/frame.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  width: 600px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
