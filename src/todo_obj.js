@@ -1,4 +1,4 @@
-class Note {
+export class Note {
   constructor(title, description, dueDate, priority, notes, checklist) {
     this.title = title;
     this.description = description;
@@ -7,6 +7,7 @@ class Note {
     this.notes = notes;
     this.checklist = checklist;
   }
+  check_toggle() {
+    this.checklist = !this.checklist;
+  }
 }
-
-export { Note }

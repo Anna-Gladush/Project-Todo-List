@@ -1,14 +1,66 @@
-:root {
-  /* --primary-color: #1269C7;
-  --secondary-color: #ffffff; */
+@font-face {
+  font-family: Middle_Ages;
+  src: url(../assets/fonts/MiddleAges_PERSONAL_USE.ttf);
 }
 @font-face {
   font-family: Middle_Ages Deco;
   src: url(../assets/fonts/MiddleAgesDeco_PERSONAL_USE.ttf);
 }
+@font-face {
+  font-family: Ancient;
+  src: url(../assets/fonts/Ancient\ Medium.ttf);
+}
+:root {
+  --primary-color: #9EB389;
+  --secondary-color: #1b330e;
+  --primary-font: Middle_Ages,'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  --decorative-font: Middle_Ages Deco, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  --number-font: Ancient, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
 * {
   padding: 0;
   margin: 0;
-  font-family: Middle_Ages Deco,'Times New Roman', Times, serif;
+  font-family: var(--primary-font);
   box-sizing: border-box;
+}
+body {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  width: 100vw;
+}
+header {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  border-right: 5px solid var(--secondary-color);
+  justify-content: space-between;
+}
+.logo p {
+  font-family: var(--decorative-font);
+  font-size: 50px;
+}
+.project-tab {
+  display: flex;
+  flex-direction: column;
+}
+.project-tab span {
+  font-family: var(--number-font);
+  font-size: 1.4em;
+}
+.project {
+  display: flex;
+  justify-content: space-between;
+}
+.project button {
+  width: 100px;
+}
+/* main {
+  width: 100vh;
+  height: 100vw;
+} */
+.workspace {
+
 }
