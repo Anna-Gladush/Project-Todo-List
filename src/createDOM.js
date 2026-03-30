@@ -41,6 +41,40 @@ export const CreateDOM = (() => {
         return 'green'
     }
   }
+  const create_input = (parent, type, placeholder_text, id) => {
+    const input = document.createElement('input');
+    input.type = type;
+    input.placeholder = placeholder_text;
+    input.id = id;
+    parent.appendChild(input)
+  }
+  const create_select = (parent) => {
+    const select = document.createElement('select');
+    const label = document.createElement('label');
+    label.setAttribute('for', 'MySelect');
+    label.textContent = 'Priority';
+    parent.appendChild(label);
+    select.setAttribute('id', 'MySelect');
+    parent.appendChild(select);
+
+    const opt = document.createElement("option");
+    opt.setAttribute("value", "Low");
+    const nod = document.createTextNode("Low");
+    opt.appendChild(nod);
+    select.appendChild(opt);
+
+    const opt1 = document.createElement("option");
+    opt1.setAttribute("value", "Moderate");
+    const nod1 = document.createTextNode("Moderate");
+    opt1.appendChild(nod1);
+    select.appendChild(opt1);
+
+    let opt2 = document.createElement("option");
+    opt2.setAttribute("value", "High");
+    let nod2 = document.createTextNode("High");
+    opt2.appendChild(nod2);
+    select.appendChild(opt2);
+  }
   const create_card = (parent, title, description, dueDate, priority, notes, check, id) => {
     const card = create_div(parent, 'card');
     create_h(card, 'h1', title);
@@ -48,12 +82,26 @@ export const CreateDOM = (() => {
     create_p(card, `- ${description}`);
     create_p(card, `<span>${dueDate}</span>`);
     create_p(card, notes);
-    // create_p(card, check);
     const card_btn = create_div(card, 'card-btn')
     create_btn(card_btn, 'open-btn', 'open', id);
     create_btn(card_btn, 'change-btn', 'change', id);
     create_btn(card_btn, 'done-btn', check_done(check), id);
     create_btn(card_btn, 'delete-btn', 'delete', id);
+  }
+  const create_note_page = (parent) => {
+    const create_notes = create_div(parent, 'create-notes')
+    create_input(create_notes, 'text', 'Title', 'title');
+    create_input(create_notes, 'text', 'Description', 'description');
+    create_input(create_notes, 'date', 'Date', 'dueDate');
+    const div = create_div(create_notes, 'priority')
+    create_select(div);
+    create_input(create_notes,  'text', 'Notes', 'notes');
+    const div1 = create_div(create_notes, 'complete')
+    const label = document.createElement('label');
+    label.setAttribute('for', 'checklist');
+    label.textContent = 'Completion status: ';
+    div1.appendChild(label);
+    create_input(div1,  'checkbox', 'checklist', 'checklist');
   }
   return {
     create_div,
@@ -61,6 +109,9 @@ export const CreateDOM = (() => {
     create_p,
     create_btn,
     create_card,
-    check_done
+    check_done,
+    create_input,
+    create_select,
+    create_note_page
   }
 })()

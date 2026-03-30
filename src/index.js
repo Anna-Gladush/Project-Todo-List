@@ -39,7 +39,6 @@ const open_card = (c) => {
   CreateDOM.create_p(card, `- ${c.description}`);
   CreateDOM.create_p(card, `<span>${c.dueDate}</span>`);
   CreateDOM.create_p(card, c.notes);
-  // create_p(card, check);
   const card_btn = CreateDOM.create_div(card, 'card-btn')
   CreateDOM.create_btn(card_btn, 'change-btn', 'change', c.id);
   CreateDOM.create_btn(card_btn, 'done-btn', CreateDOM.check_done(c.checklist), c.id);
@@ -66,3 +65,8 @@ const close = (project) => {
 }
 create_workspaceDOM(project_1)
 
+const btn = document.querySelectorAll('.add-note');
+btn.forEach(button => button.addEventListener('click', () => {
+  workspace.innerHTML = '';
+  CreateDOM.create_note_page(workspace);
+}))

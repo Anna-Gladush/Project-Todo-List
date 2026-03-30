@@ -105,3 +105,7 @@ span {
   justify-content: center;
   align-items: center;
 }
+.create-notes {
+  display: flex;
+  flex-direction: column;
+}
