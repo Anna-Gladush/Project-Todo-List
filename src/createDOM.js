@@ -31,16 +31,7 @@ export const CreateDOM = (() => {
       return 'done';
     }
   }
-  const priority = (value) => {
-    switch (value) {
-      case 1:
-        return 'red';
-      case 2:
-        return 'yellow';
-      case 3: 
-        return 'green'
-    }
-  }
+
   const create_input = (parent, type, placeholder_text, id) => {
     const input = document.createElement('input');
     input.type = type;
@@ -92,7 +83,7 @@ export const CreateDOM = (() => {
     const create_notes = create_div(parent, 'create-notes')
     create_input(create_notes, 'text', 'Title', 'title');
     create_input(create_notes, 'text', 'Description', 'description');
-    create_input(create_notes, 'date', 'Date', 'dueDate');
+    create_input(create_notes, 'datetime-local', 'Date', 'dueDate');
     const div = create_div(create_notes, 'priority')
     create_select(div);
     create_input(create_notes,  'text', 'Notes', 'notes');
@@ -102,6 +93,8 @@ export const CreateDOM = (() => {
     label.textContent = 'Completion status: ';
     div1.appendChild(label);
     create_input(div1,  'checkbox', 'checklist', 'checklist');
+    CreateDOM.create_btn(create_notes, 'close', 'close', 'close');
+    CreateDOM.create_btn(create_notes, 'submit', 'submit', 'submit');
   }
   return {
     create_div,

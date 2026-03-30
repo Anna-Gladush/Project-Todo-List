@@ -63,10 +63,38 @@ const close = (project) => {
     create_workspaceDOM(project);
   }))
 }
+const prioritySwitchCase = (value) => {
+  switch (value) {
+    case 'Low':
+      return 3;
+    case 'Moderate':
+      return 2;
+    case 'High': 
+      return 1;
+  }
+}
+const submit = (project) => {
+  const btn = document.querySelector('.submit');
+  btn.addEventListener('click', () => {
+    let title = document.getElementById('title').value;
+    let description = document.getElementById('description').value;
+    let date = document.getElementById('dueDate').value;
+    let priority = document.getElementById('MySelect').value;
+    let notes = document.getElementById('notes').value;
+    let done = document.getElementById('checklist').value;
+    const check = done === 'on' ? true : false;
+    console.log(title, description, date, priority, notes, done);
+    const newNote = new Note(title, description, format(new Date(date), "yyyy-MM-dd hh-mm-ss"), prioritySwitchCase(priority), notes, check);
+    project.push(newNote);
+    workspace.innerHTML = '';
+    create_workspaceDOM(project);
+  })
+}
 create_workspaceDOM(project_1)
-
 const btn = document.querySelectorAll('.add-note');
 btn.forEach(button => button.addEventListener('click', () => {
   workspace.innerHTML = '';
   CreateDOM.create_note_page(workspace);
+  close(project_1);
+  submit(project_1);
 }))
