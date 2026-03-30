@@ -35,7 +35,7 @@ const change = (card) => {
   workspace.innerHTML = '';
   CreateDOM.create_note_page(workspace);
   close(project_1);
-  submit(project_1);
+  submit(project_1, card);
   
   document.getElementById('title').value = card.title;
   document.getElementById('description').value = card.description;
@@ -45,15 +45,13 @@ const change = (card) => {
   document.getElementById('MySelect').value = card.priority;
   document.getElementById('notes').value = card.notes;
   document.getElementById('checklist').checked = card.checklist;
-  console.log(card.dueDate)
-  console.log((new Date(card.dueDate)))
-  console.log(`${day}T${hour}`)
+
 }
 const workspace = document.querySelector(".workspace");
 const create_workspaceDOM = (project) => {
   project.forEach((card) => {
     CreateDOM.create_card(workspace, card.title, card.description,  card.dueDate, card.priority, card.notes, card.checklist, card.id);
-  })
+  });
   open(project);
   delete_note(project);
   changeWork(project);
@@ -92,7 +90,7 @@ const close = (project) => {
     create_workspaceDOM(project);
   }))
 }
-const submit = (project) => {
+const submit = (project, element = '') => {
   const btn = document.querySelector('.submit');
   btn.addEventListener('click', () => {
     let title = document.getElementById('title').value;
@@ -101,9 +99,17 @@ const submit = (project) => {
     let priority = document.getElementById('MySelect').value;
     let notes = document.getElementById('notes').value;
     let done = document.getElementById('checklist').checked;
-    // const check = done === 'on' ? true : false;
+    if (element === ''){
     const newNote = new Note(title, description, new Date(date), priority, notes, done);
     project.push(newNote);
+  } else {
+    element.title = title;
+    element.description = description;
+    element.date = date;
+    element.priority = priority;
+    element.notes = notes;
+    element.checklist = done;
+  }
     workspace.innerHTML = '';
     create_workspaceDOM(project);
   })
