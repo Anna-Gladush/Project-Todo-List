@@ -3,31 +3,60 @@ import "./styles/styles.css";
 import { Note } from "./todo_obj.js";
 import { CreateDOM } from "./createDOM.js"
 
-const he = new Note("Make notes", "make note appear", format(new Date(), "yyyy-MM-dd hh-mm-ss"), 1, "we'll see how it works", false);
-const she = new Note("Make tea", "drink", format(new Date(2026, 3, 27, 14, 46), "yyyy-MM-dd  hh-mm-ss"), 2, "...", true);
+const he = new Note("Make notes", "make note appear", new Date(), "High", "we'll see how it works", false);
+const she = new Note("Make tea", "drink",new Date(2026, 3, 27, 14, 46), "Moderate", "...", false);
 // he.check_toggle();
 console.log(he);
 
 let project_1 = [];
 project_1.push(he, she);
-project_1.push(new Note("Make tea", "drink", format(new Date(2026, 3, 27, 14, 46), "yyyy-MM-dd  hh-mm-ss"), 2, "...", true), new Note("Make tea", "drink", format(new Date(2026, 3, 27, 14, 46), "yyyy-MM-dd  hh-mm-ss"), 2, "...", true));
+project_1.push(new Note("Make tea", "drink", new Date(2026, 3, 27, 14, 46), "Moderate", "...", true), new Note("Make tea", "drink", new Date(2026, 3, 27, 14, 46), "Moderate", "...", true));
 console.log(project_1);
 
 const delete_note = (project) => {
   const btn = document.querySelectorAll('.delete-btn');
   btn.forEach((button) => button.addEventListener('click', () => {
     console.log('work')
-    const idx = project.filter(elm => elm.id !== button.dataset.id);
+    project = project.filter(elm => elm.id !== button.dataset.id);
     workspace.innerHTML = '';
-    create_workspaceDOM(idx);
+    create_workspaceDOM(project);
   }));
 }
-
+const changeWork = (project) => {
+  // from workspace
+  const btn = document.querySelectorAll('.change-btn');
+  btn.forEach((button) => button.addEventListener('click', () => {
+    const idx = project.find(elm => elm.id === button.dataset.id);
+    console.log(idx)
+    change(idx);
+  }))
+}
+const change = (card) => {
+  workspace.innerHTML = '';
+  CreateDOM.create_note_page(workspace);
+  close(project_1);
+  submit(project_1);
+  
+  document.getElementById('title').value = card.title;
+  document.getElementById('description').value = card.description;
+  const day = (format(card.dueDate, "yyyy-MM-dd"));
+  const hour = (format(card.dueDate, "HH:mm"));
+  document.getElementById('dueDate').value = `${day}T${hour}`;
+  document.getElementById('MySelect').value = card.priority;
+  document.getElementById('notes').value = card.notes;
+  document.getElementById('checklist').checked = card.checklist;
+  console.log(card.dueDate)
+  console.log((new Date(card.dueDate)))
+  console.log(`${day}T${hour}`)
+}
 const workspace = document.querySelector(".workspace");
 const create_workspaceDOM = (project) => {
-  project.forEach((card) => CreateDOM.create_card(workspace, card.title, card.description, card.dueDate, card.priority, card.notes, card.checklist, card.id))
+  project.forEach((card) => {
+    CreateDOM.create_card(workspace, card.title, card.description,  card.dueDate, card.priority, card.notes, card.checklist, card.id);
+  })
   open(project);
   delete_note(project);
+  changeWork(project);
 }
 
 const open_card = (c) => {
@@ -63,16 +92,6 @@ const close = (project) => {
     create_workspaceDOM(project);
   }))
 }
-const prioritySwitchCase = (value) => {
-  switch (value) {
-    case 'Low':
-      return 3;
-    case 'Moderate':
-      return 2;
-    case 'High': 
-      return 1;
-  }
-}
 const submit = (project) => {
   const btn = document.querySelector('.submit');
   btn.addEventListener('click', () => {
@@ -81,10 +100,9 @@ const submit = (project) => {
     let date = document.getElementById('dueDate').value;
     let priority = document.getElementById('MySelect').value;
     let notes = document.getElementById('notes').value;
-    let done = document.getElementById('checklist').value;
-    const check = done === 'on' ? true : false;
-    console.log(title, description, date, priority, notes, done);
-    const newNote = new Note(title, description, format(new Date(date), "yyyy-MM-dd hh-mm-ss"), prioritySwitchCase(priority), notes, check);
+    let done = document.getElementById('checklist').checked;
+    // const check = done === 'on' ? true : false;
+    const newNote = new Note(title, description, new Date(date), priority, notes, done);
     project.push(newNote);
     workspace.innerHTML = '';
     create_workspaceDOM(project);
