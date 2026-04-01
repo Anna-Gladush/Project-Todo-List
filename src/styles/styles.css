@@ -67,9 +67,10 @@ span {
   /* justify-content: center; */
 }
 .card {
-  background-image: url('../assets/images/frame-work.svg');
+  /* background-image: url('../assets/images/frame-work.svg');
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center; */
+  border: 1px solid var(--secondary-color);
   font-size: 1em;
   display: flex;
   gap: 15px;
@@ -94,10 +95,11 @@ span {
 }
 .card-open {
   text-align: center;
-  background-image: url('../assets/images/frame.png');
-  background-repeat: no-repeat;
+  /* background-image: url('../assets/images/frame.png'); */
+  /* background-repeat: no-repeat;
   background-size: contain;
-  background-position: center;
+  background-position: center; */
+  border: 1px solid var(--secondary-color);
   width: 600px;
   height: 100vh;
   display: flex;
@@ -108,4 +110,20 @@ span {
 .create-notes {
   display: flex;
   flex-direction: column;
+}
+.add-project {
+  height: 100px;
+}
+.name-project {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* text-align: center; */
+  /* top: 30vh; */
+  left: 25vw;
+  width: 60vw;
+  height: 50vh;
+  background-color: var(--primary-color);
+  border: #1b330e solid 6px;
 }

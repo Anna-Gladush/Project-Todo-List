@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 export const CreateDOM = (() => {
   const create_div = (parent, class_name) => {
     const div = document.createElement('div');
@@ -71,7 +73,7 @@ export const CreateDOM = (() => {
     create_h(card, 'h1', title);
     create_p(card, priority);
     create_p(card, `- ${description}`);
-    create_p(card, `<span>${dueDate}</span>`);
+    create_p(card, `<span>${format(dueDate, "yyyy-MM-dd HH:mm")}</span>`);
     create_p(card, notes);
     const card_btn = create_div(card, 'card-btn')
     create_btn(card_btn, 'open-btn', 'open', id);
