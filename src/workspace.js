@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { Note } from "./todo_obj.js";
+import { Note } from "./note.js";
 import { CreateDOM } from "./createDOM.js";
 
 const Workspace = (() => {
