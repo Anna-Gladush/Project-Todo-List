@@ -1,8 +1,6 @@
-import { format } from "date-fns";
+
 import "./styles/styles.css";
-import { Note } from "./note.js";
-import { CreateDOM } from "./createDOM.js";
-import { Workspace } from "./workspace.js";
+
 import { Database, Project } from "./project.js";
 import { ProjectManipulation } from "./projectDOM.js";
 import { NoteManipulation } from "./noteDOM.js";

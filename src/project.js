@@ -36,9 +36,6 @@ class Project {
   showProject() {
     return this.project;
   }
-  returnValues() {
-    
-  }
   changeName(value) {
     return this.name = value;
   }

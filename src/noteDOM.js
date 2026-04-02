@@ -1,5 +1,4 @@
 import { format } from "date-fns";
-import { Project } from "./project.js";
 import { CreateDOM } from "./createDOM.js";
 
 const NoteManipulation = (() => {
@@ -13,6 +12,7 @@ const NoteManipulation = (() => {
     changeNote(project);
     openNote(project);
     deleteNote(project);
+    checkNote(project);
   }
 
   const addNote = (project) => {
@@ -57,6 +57,7 @@ const NoteManipulation = (() => {
       closeNote(project);
       changeNote(project);
       deleteNote(project);
+      checkNote(project);
     }));
   }
 
@@ -108,7 +109,16 @@ const NoteManipulation = (() => {
       projectDisplay(project)
     })
   }
-
+   
+  const checkNote = (project) => {
+    const btn = document.querySelectorAll('.done-btn');
+    btn.forEach(button => button.addEventListener('click', () => {
+      const element = project.project.find(elem => elem.id === button.dataset.id);
+      element.check_toggle();
+      button.textContent = CreateDOM.check_done(element.checklist);
+      console.log(element)
+    }))
+  }
   return {
     projectDisplay,
     addNote,
@@ -116,7 +126,8 @@ const NoteManipulation = (() => {
     openNote,
     deleteNote,
     changeNote,
-    submitNote
+    submitNote,
+    checkNote
   }
 })()
 
