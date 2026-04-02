@@ -1,4 +1,5 @@
 import { CreateDOM } from "./createDOM.js";
+import { NoteManipulation } from "./noteDOM.js";
 
 const ProjectManipulation = (() => {
   let project_count = 1;
@@ -38,8 +39,11 @@ const ProjectManipulation = (() => {
     btn.forEach(button => button.addEventListener('click', () => {
       const div = document.getElementById(button.dataset.id);
       // Renaming
-      const text = askForAName()
-      div.firstElementChild.innerHTML = text;
+      const name = askForAName()
+      if (!name) {
+        return
+      }
+      div.firstElementChild.innerHTML = name;
       // saveName();
     }))
   }
@@ -55,6 +59,7 @@ const ProjectManipulation = (() => {
     addProject();
     renameProject();
     deleteProject();
+    NoteManipulation.addNote();
   }
   return {
     addProject,

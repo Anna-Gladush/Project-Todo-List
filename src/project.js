@@ -19,33 +19,28 @@ class Project {
     this.project = [];
     this.name = name;
   }
-  addNote(note) {
-    const title = document.getElementById('title').value;
-    const description = document.getElementById('description').value;
-    const date = document.getElementById('dueDate').value;
-    const priority = document.getElementById('MySelect').value;
-    const notes = document.getElementById('notes').value;
-    const check = document.getElementById('checklist').checked;
-    if (!note) {
-      this.project.push(new Note(title, description, new Date(date), priority, notes, done));
-    } else {
-      note.title = title;
-      note.description = description;
-      note.date = date;
-      note.priority = priority;
-      note.notes = notes;
-      note.checklist = check;
-    }
+  addNote(title, description, date, priority, notes, check) {
+      this.project.push(new Note(title, description, new Date(date), priority, notes, check));
   }
   deleteNote(note) {
     this.project = this.project.filter(elem => elem !== note);
   }
-
-  showProject() {
-    return this.project
+  changeNote(element, title, description, date, priority, notes, check) {
+    element.title = title;
+    element.description = description;
+    element.date = date;
+    element.priority = priority;
+    element.notes = notes;
+    element.checklist = check;
   }
-  set name(value) {
-    this.name = value;
+  showProject() {
+    return this.project;
+  }
+  returnValues() {
+    
+  }
+  changeName(value) {
+    return this.name = value;
   }
 }
 
