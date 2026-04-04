@@ -4,40 +4,60 @@ import { CreateDOM } from "./createDOM.js";
 const NoteManipulation = (() => {
   const workspace = document.querySelector(".workspace");
 
-  const projectDisplay = (project) => {
+  const projectDisplay = (project, database) => {
+    workspace.innerHTML = '';
     project.project.forEach((card) => {
       CreateDOM.create_card(workspace, card.title, card.description,  card.dueDate, card.priority, card.notes, card.checklist, card.id);
     });
-    addNote(project);
-    changeNote(project);
-    openNote(project);
-    deleteNote(project);
+    addNote(project,database);
+    changeNote(project, database);
+    openNote(project, database);
+    deleteNote(project, database);
     checkNote(project);
+    openProject(database)
   }
+  const openProject = (database) => {
+    const div = document.querySelectorAll('.project');
+    div.forEach(project => {
+      project.querySelector('.add-note');
+      project.addEventListener('click', () => {
+        const name = project.firstElementChild.textContent;
+        const projects = database.projects.find(elem => elem[0] === name)[1];
+        addNote(projects, database)
+      });
+      project.firstElementChild.addEventListener('click', () => {
+      const name = project.firstElementChild.textContent;
+      const projects = database.projects.find(elem => elem[0] === name)[1];
+      addNote(projects, database)
+      projectDisplay(projects, database);
+      });
 
-  const addNote = (project) => {
+    })
+ 
+  }
+  const addNote = (project, database) => {
     const btn = document.querySelectorAll('.add-note');
     btn.forEach(button => button.addEventListener('click', () => {
       workspace.innerHTML = '';
       CreateDOM.create_note_page(workspace);
-      closeNote(project);
-      submitNote(project);
-      deleteNote(project);
+      closeNote(project, database);
+      deleteNote(project, database);
+      submitNote(project, database);
     }))
   }
 
-  const deleteNote = (project) => {
+  const deleteNote = (project, database) => {
     const btn = document.querySelectorAll('.delete-btn');
     btn.forEach((button) => button.addEventListener('click', () => {
       const element = project.project.find(elm => elm.id === button.dataset.id);
       project.deleteNote(element);
 
       workspace.innerHTML = '';
-      projectDisplay(project);
+      projectDisplay(project, database);
     }))
   }
 
-  const openNote = (project) => {
+  const openNote = (project, database) => {
     const btn = document.querySelectorAll('.open-btn');
     btn.forEach((button) => button.addEventListener('click', () => {
       workspace.innerHTML = '';
@@ -54,22 +74,22 @@ const NoteManipulation = (() => {
       CreateDOM.create_btn(card_btn, 'delete-btn', 'delete', element.id);
       CreateDOM.create_btn(card_btn, 'close', 'close', element.id);
 
-      closeNote(project);
-      changeNote(project);
+      closeNote(project, database);
+      changeNote(project, database);
       deleteNote(project);
       checkNote(project);
     }));
   }
 
-  const closeNote = (project) => {
+  const closeNote = (project, database) => {
     const btn = document.querySelector('.close');
     btn.addEventListener('click', () => {
       workspace.innerHTML = '';
-      projectDisplay(project);
+      projectDisplay(project, database);
     })
   }
 
-  const changeNote = (project) => {
+  const changeNote = (project, database) => {
     const btn = document.querySelectorAll('.change-btn');
     btn.forEach((button) => button.addEventListener('click', () => {
       const element = project.project.find(elm => elm.id === button.dataset.id);
@@ -85,13 +105,13 @@ const NoteManipulation = (() => {
       document.getElementById('notes').value = element.notes;
       document.getElementById('checklist').checked = element.checklist;
 
-      closeNote(project);
-      submitNote(project, element);
+      closeNote(project, database);
+      submitNote(project, database, element);
     }))
   }
   
 
-  const submitNote = (project, element) => {
+  const submitNote = (project, database, element = false) => {
     const btn = document.querySelector('.submit');
     btn.addEventListener('click', () => {
       const title = document.getElementById('title').value;
@@ -106,7 +126,7 @@ const NoteManipulation = (() => {
         project.changeNote(element, title, description, date, priority, notes, check)
       }
       workspace.innerHTML = '';
-      projectDisplay(project)
+      projectDisplay(project, database)
     })
   }
    
@@ -116,7 +136,6 @@ const NoteManipulation = (() => {
       const element = project.project.find(elem => elem.id === button.dataset.id);
       element.check_toggle();
       button.textContent = CreateDOM.check_done(element.checklist);
-      console.log(element)
     }))
   }
   return {
@@ -127,7 +146,8 @@ const NoteManipulation = (() => {
     deleteNote,
     changeNote,
     submitNote,
-    checkNote
+    checkNote,
+    openProject
   }
 })()
 

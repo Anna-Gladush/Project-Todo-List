@@ -1,4 +1,4 @@
-@font-face {
+/* @font-face {
   font-family: Middle_Ages;
   src: url(../assets/fonts/MiddleAges_PERSONAL_USE.ttf);
 }
@@ -10,7 +10,7 @@
   font-family: Ancient;
   src: url(../assets/fonts/Ancient\ Medium.ttf);
   unicode-range: U+30-39;
-}
+} */
 :root {
   --primary-color: #9EB389;
   --secondary-color: #1b330e;

@@ -3,8 +3,8 @@ class Database {
   constructor() {
     this.projects = [];
   }
-  addProject(project) {
-    this.projects.push(project);
+  addProject(name, project) {
+    this.projects.push([name, project]);
   }
   deleteProject(project) {
     this.projects = this.projects.filter(elem => elem !== project);
@@ -15,9 +15,8 @@ class Database {
 }
 
 class Project {
-  constructor(name) {
+  constructor() {
     this.project = [];
-    this.name = name;
   }
   addNote(title, description, date, priority, notes, check) {
       this.project.push(new Note(title, description, new Date(date), priority, notes, check));
@@ -37,7 +36,7 @@ class Project {
     return this.project;
   }
   changeName(value) {
-    return this.name = value;
+    return this.project.name = value;
   }
 }
 
