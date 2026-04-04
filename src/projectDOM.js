@@ -3,17 +3,6 @@ import { NoteManipulation } from "./noteDOM.js";
 import { Database, Project } from "./project.js";
 
 const ProjectManipulation = (() => {
-  const database = new Database();
-  let project_count = 1;
-
-  const saveDatabase = () => {
-    const userDatabase = {
-      database: database
-    }
-    const json = JSON.stringify(userDatabase);
-    localStorage.setItem("userDatabase", json);
-  }
-
   const loadDatabase = () => {
     const json = localStorage.getItem("userDatabase");
     if (!json) {
@@ -26,6 +15,17 @@ const ProjectManipulation = (() => {
       console.error("Failed to parse profile JSON:", err);
       return null;
     }
+  } 
+// loadDatabase() || 
+  const database = new Database();
+  let project_count = 1;
+
+  const saveDatabase = () => {
+    const userDatabase = {
+      database: database
+    }
+    const json = JSON.stringify(userDatabase);
+    localStorage.setItem("userDatabase", json);
   }
 
   const clearDatabase = () => {
@@ -44,12 +44,12 @@ const ProjectManipulation = (() => {
         name = `Project-${project_count}`;
       }
       addProjectDOM(name);
-      database.addProject(name, new Project);
-      const pr = database.projects.find(proj => proj[0] === name)
+      database.addProject(name, new Project, project_count - 1);
       deleteProject();
       renameProject();
       NoteManipulation.openProject(database);
-      // NoteManipulation.projectDisplay(database, pr)
+      clearDatabase();
+      saveDatabase(); 
     })
   }
 
@@ -77,6 +77,8 @@ const ProjectManipulation = (() => {
       let renameProject = projects.find(elem => elem[0] === prev_name);
       renameProject[0] = name;
     }))
+    clearDatabase();
+    saveDatabase();
   }
   const deleteProject = () => {
     const btn = document.querySelectorAll('.delete-space');
@@ -84,12 +86,13 @@ const ProjectManipulation = (() => {
     btn.forEach(button => button.addEventListener('click', () => {
       if (project_count > 1){
         const project = document.getElementById(button.dataset.id);
-        const name = project.firstElementChild.textContent;
-        const projects = database.projects.find(elem => elem[0] === name);
-        database.deleteProject(projects);
+        const projects = database.projects.filter(elem => elem[2] !== button.dataset.id);
         div.removeChild(project);
+        database.deleteProject(projects);
         document.querySelector('.workspace').innerHTML = '';
-        project_count --;  
+        project_count --; 
+        clearDatabase();
+        saveDatabase(); 
       } else {
         return
       }
@@ -105,23 +108,20 @@ const ProjectManipulation = (() => {
   }
 
   const addFirstWorkspace = () => {
-    database.addProject('Project-1', new Project);
+    database.addProject('Project-1', new Project, project_count);
     addProjectDOM('Project-1');
-
-    // database.addProject('Project-2', new Project);
-    // addProjectDOM('Project-2');
-    // Project object is database.projects[nom proj][1]
     const proj_1 = database.projects[0][1];
-    // const proj_2 = database.projects[1][1];
-    // console.log('Pr-2', proj_2)
-    // const note = database.projects[0][1][0];
-    // database.projects.forEach(pro => console.log(pro[1].project));
-    
-
     proj_1.addNote("Make notes", "make note appear", new Date(), "High", "we'll see how it works", false);
     proj_1.addNote("Make notes", "make note appear", new Date(), "High", "we'll see how it works", false);
     NoteManipulation.projectDisplay(proj_1, database);
     NoteManipulation.openProject(database);
+
+    // database.addProject('Project-2', new Project);
+    // addProjectDOM('Project-2');
+    // Project object is database.projects[nom proj][1]
+    // const proj_2 = database.projects[1][1];
+    // const note = database.projects[0][1][0];
+    // database.projects.forEach(pro => console.log(pro[1].project));
   }
   return {
     addProject,

@@ -1,22 +1,11 @@
-/* @font-face {
-  font-family: Middle_Ages;
-  src: url(../assets/fonts/MiddleAges_PERSONAL_USE.ttf);
-}
 @font-face {
-  font-family: Middle_Ages Deco;
-  src: url(../assets/fonts/MiddleAgesDeco_PERSONAL_USE.ttf);
-}
-@font-face {
-  font-family: Ancient;
-  src: url(../assets/fonts/Ancient\ Medium.ttf);
-  unicode-range: U+30-39;
-} */
+  font-family: NovaRound;
+  src: url(../assets/fonts/NovaRound-Regular.ttf);
+} 
 :root {
   --primary-color: #9EB389;
   --secondary-color: #1b330e;
-  --primary-font: Ancient, Middle_Ages,'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  --decorative-font: Ancient, Middle_Ages Deco, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  /* --number-font: Ancient, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
+  --primary-font: NovaRound, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 * {
@@ -46,10 +35,6 @@ header {
 .project-tab {
   display: flex;
   flex-direction: column;
-}
-span {
-  /* font-family: var(--number-font); */
-  font-size: 1.4em;
 }
 .project {
   display: flex;

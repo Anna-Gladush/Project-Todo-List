@@ -3,8 +3,8 @@ class Database {
   constructor() {
     this.projects = [];
   }
-  addProject(name, project) {
-    this.projects.push([name, project]);
+  addProject(name, project, id) {
+    this.projects.push([name, project, id]);
   }
   deleteProject(project) {
     this.projects = this.projects.filter(elem => elem !== project);
