@@ -3,6 +3,9 @@ class Database {
   constructor() {
     this.projects = [];
   }
+  static fromJSON = (json) => {
+    console.log(json)
+  }
   addProject(name, project, id) {
     this.projects.push([name, project, id]);
   }

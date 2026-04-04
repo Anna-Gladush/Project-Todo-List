@@ -1,5 +1,7 @@
 import { format } from "date-fns";
 import { CreateDOM } from "./createDOM.js";
+import { ProjectManipulation } from "./projectDOM.js";
+
 
 const NoteManipulation = (() => {
   const workspace = document.querySelector(".workspace");
@@ -16,24 +18,20 @@ const NoteManipulation = (() => {
     checkNote(project);
     openProject(database)
   }
+  const searchProject = () => {
+    
+  }
   const openProject = (database) => {
     const div = document.querySelectorAll('.project');
     div.forEach(project => {
-      project.querySelector('.add-note');
-      project.addEventListener('click', () => {
-        const name = project.firstElementChild.textContent;
-        const projects = database.projects.find(elem => elem[0] === name)[1];
-        addNote(projects, database)
-      });
       project.firstElementChild.addEventListener('click', () => {
       const name = project.firstElementChild.textContent;
-      const projects = database.projects.find(elem => elem[0] === name)[1];
-      addNote(projects, database)
-      projectDisplay(projects, database);
+      const projects = database.projects.find(elem => (elem[0] == name))
+      addNote(projects[1], database)
+      projectDisplay(projects[1], database);
       });
 
     })
- 
   }
   const addNote = (project, database) => {
     const btn = document.querySelectorAll('.add-note');
@@ -51,9 +49,11 @@ const NoteManipulation = (() => {
     btn.forEach((button) => button.addEventListener('click', () => {
       const element = project.project.find(elm => elm.id === button.dataset.id);
       project.deleteNote(element);
-
+      ProjectManipulation.clearDatabase();
+      ProjectManipulation.saveDatabase();
       workspace.innerHTML = '';
       projectDisplay(project, database);
+
     }))
   }
 
@@ -126,7 +126,9 @@ const NoteManipulation = (() => {
         project.changeNote(element, title, description, date, priority, notes, check)
       }
       workspace.innerHTML = '';
-      projectDisplay(project, database)
+      projectDisplay(project, database);
+      ProjectManipulation.clearDatabase();
+      ProjectManipulation.saveDatabase();
     })
   }
    
@@ -136,6 +138,8 @@ const NoteManipulation = (() => {
       const element = project.project.find(elem => elem.id === button.dataset.id);
       element.check_toggle();
       button.textContent = CreateDOM.check_done(element.checklist);
+      ProjectManipulation.clearDatabase();
+      ProjectManipulation.saveDatabase();
     }))
   }
   return {
