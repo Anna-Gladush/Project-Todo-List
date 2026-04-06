@@ -39,7 +39,8 @@ export const CreateDOM = (() => {
     input.type = type;
     input.placeholder = placeholder_text;
     input.id = id;
-    parent.appendChild(input)
+    parent.appendChild(input);
+    return input;
   }
   const create_select = (parent) => {
     const select = document.createElement('select');
@@ -73,7 +74,7 @@ export const CreateDOM = (() => {
     create_h(card, 'h1', title);
     create_p(card, priority);
     create_p(card, `- ${description}`);
-    create_p(card, `<span>${format(dueDate, "yyyy-MM-dd HH:mm")}</span>`);
+    create_p(card, `${format(dueDate, "yyyy-MM-dd HH:mm")}`);
     create_p(card, notes);
     const card_btn = create_div(card, 'card-btn')
     create_btn(card_btn, 'open-btn', 'open', id);
@@ -83,9 +84,16 @@ export const CreateDOM = (() => {
   }
   const create_note_page = (parent) => {
     const create_notes = create_div(parent, 'create-notes')
-    create_input(create_notes, 'text', 'Title', 'title');
+    const title = create_input(create_notes, 'text', '*Title', 'title');
+    title.required = true;
     create_input(create_notes, 'text', 'Description', 'description');
-    create_input(create_notes, 'datetime-local', 'Date', 'dueDate');
+    const div0 = create_div(create_notes, 'complete')
+    const label_date = document.createElement('label');
+    label_date.setAttribute('for', 'dueDate');
+    label_date.textContent = '*Date: ';
+    div0.appendChild(label_date);
+    const date = create_input(div0, 'datetime-local', 'Date', 'dueDate');
+    date.required = true;
     const div = create_div(create_notes, 'priority')
     create_select(div);
     create_input(create_notes,  'text', 'Notes', 'notes');

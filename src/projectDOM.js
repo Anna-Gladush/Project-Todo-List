@@ -148,7 +148,7 @@ const ProjectManipulation = (() => {
   let project_count = loadProjectCount() || 1;
   const database = loadDatabase() || savedDB();
 
-  // clearDatabase();
+  clearDatabase();
 
   return {
     addProject,

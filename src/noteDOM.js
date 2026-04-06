@@ -110,7 +110,25 @@ const NoteManipulation = (() => {
     }))
   }
   
+  const checkTitle = () => {
+    const title = document.getElementById('title');
+    if (title.value == '') {
+      title.setCustomValidity("The title's name must be filled!");
+      return title.reportValidity();
+    }
+    title.setCustomValidity("");
+    return title.reportValidity();
+  }
 
+  const checkDate = () => {
+    const date = document.getElementById('dueDate');
+    if (date.value == '') {
+      date.setCustomValidity("The date must be filled!");
+      return date.reportValidity();
+    }
+    date.setCustomValidity("");
+    return date.reportValidity();
+  }
   const submitNote = (project, database, element = false) => {
     const btn = document.querySelector('.submit');
     btn.addEventListener('click', () => {
@@ -120,15 +138,17 @@ const NoteManipulation = (() => {
       const priority = document.getElementById('MySelect').value;
       const notes = document.getElementById('notes').value;
       const check = document.getElementById('checklist').checked;
-      if(!element){
-        project.addNote(title, description, date, priority, notes, check)
-      } else {
-        project.changeNote(element, title, description, date, priority, notes, check)
-      }
-      workspace.innerHTML = '';
-      projectDisplay(project, database);
-      ProjectManipulation.clearDatabase();
-      ProjectManipulation.saveDatabase();
+      if (checkTitle() && checkDate()){
+        if(!element){
+          project.addNote(title, description, date, priority, notes, check)
+        } else {
+          project.changeNote(element, title, description, date, priority, notes, check)
+        }
+        workspace.innerHTML = '';
+        projectDisplay(project, database);
+        ProjectManipulation.clearDatabase();
+        ProjectManipulation.saveDatabase();
+    }
     })
   }
    
