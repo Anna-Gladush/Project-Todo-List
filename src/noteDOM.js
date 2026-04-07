@@ -70,7 +70,8 @@ const NoteManipulation = (() => {
       CreateDOM.create_p(card, element.notes);
       const card_btn = CreateDOM.create_div(card, 'card-btn')
       CreateDOM.create_btn(card_btn, 'change-btn', 'change', element.id);
-      CreateDOM.create_btn(card_btn, 'done-btn', CreateDOM.check_done(element.checklist), element.id);
+      const btn = CreateDOM.create_btn(card_btn, 'done-btn', CreateDOM.check_done(element.checklist), element.id);
+      CreateDOM.checkAddClass(btn, element.checklist);
       CreateDOM.create_btn(card_btn, 'delete-btn', 'delete', element.id);
       CreateDOM.create_btn(card_btn, 'close', 'close', element.id);
 
@@ -157,6 +158,8 @@ const NoteManipulation = (() => {
     btn.forEach(button => button.addEventListener('click', () => {
       const element = project.project.find(elem => elem.id === button.dataset.id);
       element.check_toggle();
+      console.log(button, element.checklist)
+      CreateDOM.checkAddClass(button, element.checklist);
       button.textContent = CreateDOM.check_done(element.checklist);
       ProjectManipulation.clearDatabase();
       ProjectManipulation.saveDatabase();

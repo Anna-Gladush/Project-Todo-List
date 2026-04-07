@@ -25,15 +25,24 @@ export const CreateDOM = (() => {
     btn.textContent = text;
     btn.dataset.id = id;
     parent.appendChild(btn);
+    return btn;
   }
   const check_done = (check) => {
     if (check) {
-      return 'undone';
-    } else {
       return 'done';
+    } else {
+      return 'undone';
     }
   }
-
+  const checkAddClass = (element, check) => {
+  if (check === true){
+    element.classList.add('done');
+    element.classList.remove('undone');
+  } else {
+    element.classList.add('undone');
+    element.classList.remove('done');
+  }
+  }
   const create_input = (parent, type, placeholder_text, id) => {
     const input = document.createElement('input');
     input.type = type;
@@ -79,7 +88,8 @@ export const CreateDOM = (() => {
     const card_btn = create_div(card, 'card-btn')
     create_btn(card_btn, 'open-btn', 'open', id);
     create_btn(card_btn, 'change-btn', 'change', id);
-    create_btn(card_btn, 'done-btn', check_done(check), id);
+    const btn = create_btn(card_btn, 'done-btn', check_done(check), id);
+    checkAddClass(btn, check);
     create_btn(card_btn, 'delete-btn', 'delete', id);
   }
   const create_note_page = (parent) => {
@@ -115,6 +125,7 @@ export const CreateDOM = (() => {
     check_done,
     create_input,
     create_select,
-    create_note_page
+    create_note_page,
+    checkAddClass
   }
 })()

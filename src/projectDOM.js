@@ -105,7 +105,7 @@ const ProjectManipulation = (() => {
       const projects = database.projects;
       const prev_name = div.firstElementChild.textContent
       const name = askForAName()
-      if (!name) {
+      if (name == '') {
         return
       }
       div.firstElementChild.innerHTML = name;
@@ -131,6 +131,7 @@ const ProjectManipulation = (() => {
         }
         document.querySelector('.workspace').innerHTML = '';
         project_count --; 
+        domFunctionality()
         clearDatabase();
         saveDatabase(); 
       } else {

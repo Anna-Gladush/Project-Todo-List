@@ -3,8 +3,8 @@
   src: url(../assets/fonts/NovaRound-Regular.ttf);
 } 
 :root {
-  --primary-color: #9EB389;
-  --secondary-color: #1b330e;
+  --primary-color: #283F76;
+  --secondary-color: #FFF6B7;
   --primary-font: NovaRound, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
@@ -19,44 +19,52 @@ body {
   color: var(--secondary-color);
   display: grid;
   grid-template-columns: 1fr 4fr;
-  width: 100vw;
+  width: 100%;
+
 }
 header {
   display: flex;
   flex-direction: column;
   height: 100vh;
   border-right: 5px solid var(--secondary-color);
-  justify-content: space-between;
+  justify-content: space-around;
+  padding-right: 10px;
+  margin-left: 10px;
+}
+header button {
+  background-color: var(--secondary-color); 
+  color: var(--primary-color);
+  border: none;
+  border-radius: 30px;
+  font-size: large;
+}
+header a {
+  color: var(--secondary-color);
 }
 .logo p {
-  font-family: var(--decorative-font);
   font-size: 50px;
+  margin-bottom: 10px;
 }
 .project-tab {
   display: flex;
   flex-direction: column;
+  height: 40vh;
+  overflow: auto;
 }
 .project {
   display: flex;
   justify-content: space-between;
 }
-.project button {
-  width: 70px;
-  font-size: 20px;
-}
+
 .workspace {
+  height: 100vh;
   display: flex;
   flex-wrap: wrap;
   overflow: auto;
-  /* width: 10000em; */
-  /* justify-content: center; */
 }
 .card {
-  /* background-image: url('../assets/images/frame-work.svg');
-  background-repeat: no-repeat;
-  background-position: center; */
-  border: 1px solid var(--secondary-color);
-  font-size: 1em;
+  border: 3px solid var(--secondary-color);
+  font-size: 1.3em;
   display: flex;
   gap: 15px;
   flex-direction: column;
@@ -65,28 +73,39 @@ header {
   text-wrap: balance;
   margin: 1.5em;
   padding: 2em;
-  /* width: 2000px; */
-  height: 35em;
+  height: 25em;
+  width: 20em;
   max-inline-size: 50ch;
 
 }
-.card span {
-  font-size: 2em;
-  max-inline-size: 30ch;
+
+.card button,
+.project-tab button,
+.card-open button {
+  width: 70px;
+  font-size: 15px;
+  color: var(--primary-color);
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 20px;
+  margin: 3px;
+  padding: 3px;
 }
-.card button {
-  height: 20px;
-  font-size: 1em;
+.done-btn.undone {
+  color: var(--secondary-color);
+  background-color: #239dca;
+}
+.done-btn.done {
+  color: var(--secondary-color);
+  background-color: #7e170d;
 }
 .card-open {
+  margin-left: 10vw;
+  margin-top: 10vh;
   text-align: center;
-  /* background-image: url('../assets/images/frame.png'); */
-  /* background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center; */
   border: 1px solid var(--secondary-color);
-  width: 600px;
-  height: 100vh;
+  width: 700px;
+  height: 60vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
