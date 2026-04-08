@@ -55,7 +55,7 @@ export const CreateDOM = (() => {
     const select = document.createElement('select');
     const label = document.createElement('label');
     label.setAttribute('for', 'MySelect');
-    label.textContent = 'Priority';
+    label.textContent = 'Priority:';
     parent.appendChild(label);
     select.setAttribute('id', 'MySelect');
     parent.appendChild(select);
@@ -93,10 +93,20 @@ export const CreateDOM = (() => {
     create_btn(card_btn, 'delete-btn', 'delete', id);
   }
   const create_note_page = (parent) => {
-    const create_notes = create_div(parent, 'create-notes')
-    const title = create_input(create_notes, 'text', '*Title', 'title');
+    const create_notes = create_div(parent, 'create-notes');
+    const label_title = document.createElement('label');
+    const div_title = create_div(create_notes, 'title-div');
+    label_title.setAttribute('for', 'title');
+    label_title.textContent = 'Title:';
+    div_title.appendChild(label_title);
+    const title = create_input(div_title, 'text', '*Title', 'title');
     title.required = true;
-    create_input(create_notes, 'text', 'Description', 'description');
+    const div_desc = create_div(create_notes, 'desc-div');
+    const label_desc = document.createElement('label')
+    label_desc.setAttribute('for', 'description');
+    label_desc.textContent = 'Description:';
+    div_desc.appendChild(label_desc);
+    create_input(div_desc, 'text', 'Description', 'description');
     const div0 = create_div(create_notes, 'complete')
     const label_date = document.createElement('label');
     label_date.setAttribute('for', 'dueDate');
@@ -106,15 +116,21 @@ export const CreateDOM = (() => {
     date.required = true;
     const div = create_div(create_notes, 'priority')
     create_select(div);
-    create_input(create_notes,  'text', 'Notes', 'notes');
+    const div_notes = create_div(create_notes, 'notes-div');
+    const label_notes = document.createElement('label')
+    label_notes.setAttribute('for', 'notes');
+    label_notes.textContent = 'Notes:';
+    div_notes.appendChild(label_notes);
+    create_input(div_notes,  'text', 'Notes', 'notes');
     const div1 = create_div(create_notes, 'complete')
     const label = document.createElement('label');
     label.setAttribute('for', 'checklist');
     label.textContent = 'Completion status: ';
     div1.appendChild(label);
     create_input(div1,  'checkbox', 'checklist', 'checklist');
-    CreateDOM.create_btn(create_notes, 'close', 'close', 'close');
-    CreateDOM.create_btn(create_notes, 'submit', 'submit', 'submit');
+    const btn_div = create_div(create_notes, 'btn-div')
+    create_btn(btn_div, 'close', 'close', 'close');
+    create_btn(btn_div, 'submit', 'submit', 'submit');
   }
   return {
     create_div,

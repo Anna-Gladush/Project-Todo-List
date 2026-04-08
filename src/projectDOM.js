@@ -23,9 +23,10 @@ const ProjectManipulation = (() => {
     const proj_div = CreateDOM.create_div(div, 'project');
     proj_div.setAttribute('id', id);
     CreateDOM.create_p(proj_div, name)
-    CreateDOM.create_btn(proj_div, 'add-note', '+', id);
-    CreateDOM.create_btn(proj_div, 'delete-space', '—', id);
-    CreateDOM.create_btn(proj_div, 'rename', 'rename', id);
+    const btn_div = CreateDOM.create_div(proj_div, 'btn-div')
+    CreateDOM.create_btn(btn_div, 'add-note', '+', id);
+    CreateDOM.create_btn(btn_div, 'delete-space', '—', id);
+    CreateDOM.create_btn(btn_div, 'rename', 'rename', id);
   }
 
   const loadDatabase = () => {
@@ -76,10 +77,21 @@ const ProjectManipulation = (() => {
   const clearDatabase = () => {
     localStorage.removeItem("userDatabase");
   }
+  // FOR ADDING PROJECT, NOT RENAMING
+  const checkName = () => {
+    const name = document.getElementById('ask-name');
+    if (name.value == '') {
+      name.setCustomValidity("The name must be filled!");
+      return name.reportValidity();
+    }
+    name.setCustomValidity("");
+    return name.reportValidity();
+  }
 
   const askForAName = () => {
-    return prompt('Name: ');
+    return prompt('Name? ')
   }
+
   const addProject = () => {
     const btn = document.querySelector('.add-project');
     btn.addEventListener('click', () => {
@@ -90,8 +102,7 @@ const ProjectManipulation = (() => {
       }
       addProjectDOM(name);
       database.addProject(name, new Project, project_count);
-      deleteProject();
-      renameProject();
+      domFunctionality()
       NoteManipulation.openProject(database);
       clearDatabase()
       saveDatabase(); 
@@ -108,9 +119,11 @@ const ProjectManipulation = (() => {
       if (name == '') {
         return
       }
-      div.firstElementChild.innerHTML = name;
+      div.firstElementChild.textContent = name;
       let renameProject = projects.find(elem => elem[0] === prev_name);
       renameProject[0] = name;
+      console.log(div, button.dataset.id, prev_name, name, renameProject)
+
       clearDatabase()
       saveDatabase(); 
     }))

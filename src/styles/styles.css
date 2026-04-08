@@ -6,6 +6,7 @@
   --primary-color: #283F76;
   --secondary-color: #FFF6B7;
   --primary-font: NovaRound, 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  --border: 3px solid var(--secondary-color);
 }
 
 * {
@@ -43,7 +44,7 @@ header a {
 }
 .logo p {
   font-size: 50px;
-  margin-bottom: 10px;
+  margin-bottom: 10vh;
 }
 .project-tab {
   display: flex;
@@ -54,6 +55,9 @@ header a {
 .project {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+  font-size: 1.1em;
 }
 
 .workspace {
@@ -63,7 +67,7 @@ header a {
   overflow: auto;
 }
 .card {
-  border: 3px solid var(--secondary-color);
+  border: var(--border);
   font-size: 1.3em;
   display: flex;
   gap: 15px;
@@ -76,12 +80,13 @@ header a {
   height: 25em;
   width: 20em;
   max-inline-size: 50ch;
-
+  border-radius: 2.5em;
 }
 
 .card button,
 .project-tab button,
-.card-open button {
+.card-open button,
+.btn-div button {
   width: 70px;
   font-size: 15px;
   color: var(--primary-color);
@@ -91,6 +96,11 @@ header a {
   margin: 3px;
   padding: 3px;
 }
+/* .add-note,
+.delete-space,
+.rename {
+  width: 20px;
+} */
 .done-btn.undone {
   color: var(--secondary-color);
   background-color: #239dca;
@@ -103,13 +113,29 @@ header a {
   margin-left: 10vw;
   margin-top: 10vh;
   text-align: center;
-  border: 1px solid var(--secondary-color);
+  border: var(--border);
+  border-radius: 70px;
   width: 700px;
   height: 60vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: auto;
+}
+.card-open:first-child {
+  font-size: 1.7em;
+}
+.card-open p,
+.card-open div {
+  padding-top: 4vh;
+  /* font-size: 1.7em; */
+}
+.card-open button,
+.btn-div button {
+  width: 60px;
+  height: 35px;
+  font-size: 0.9em;
 }
 .create-notes {
   display: flex;
@@ -130,4 +156,31 @@ header a {
   height: 50vh;
   background-color: var(--primary-color);
   border: #1b330e solid 6px;
+}
+
+.create-notes {
+  justify-content: center;
+  align-items: end;
+  margin-left: 30vw;
+  font-size: 1.3em;
+  /* width: 70vw; */
+}
+.create-notes input,
+select {
+  text-align: center;
+  width: 20vw;
+  height: 5vh;
+  font-size: 1em;
+
+}
+.complete {
+  display: flex;
+  align-items: center;
+}
+.create-notes label {
+  margin-right: 5em;
+}
+#checklist {
+  width: 30px;
+  margin-left: 3em;
 }
