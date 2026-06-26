@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useState } from "react"
 
-import Navigation from "./components/Navigation"
+import Sidebar from "./components/Sidebar"
 
 function App() {
   const standartNote = {
@@ -14,9 +14,10 @@ function App() {
     id: crypto.randomUUID()
   }
 
-  const [projects, setProjects] = useState({"project-1": standartNote})
+  const [projects, setProjects] = useState([{name: "project-1", id: crypto.randomUUID(), notes: [standartNote]}])
 
   const createProject = (event) => {
+    // re - set
     const { value } = event.current.target
     setProjects(prevProjects => ({...prevProjects, value: standartNote}))
   }
