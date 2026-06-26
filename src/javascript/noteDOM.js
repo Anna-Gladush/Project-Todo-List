@@ -18,9 +18,9 @@ const NoteManipulation = (() => {
     checkNote(project);
     openProject(database)
   }
-  const searchProject = () => {
+  // const searchProject = () => {
     
-  }
+  // }
   const openProject = (database) => {
     const div = document.querySelectorAll('.project');
     div.forEach(project => {
